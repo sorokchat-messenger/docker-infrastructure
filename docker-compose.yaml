@@ -17,6 +17,5 @@ services:
       - sorokchat
 networks:
   sorokchat: 
-    external: true
     name: sorokchat
   
