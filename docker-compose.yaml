@@ -8,7 +8,7 @@ services:
     volumes:
       - ./database/postgres_data:/var/lib/postgresql
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready" ]
+      test: [ "CMD-SHELL", "pg_isready -U sorokchat" ]
       interval: 5s
       timeout: 5s
       retries: 5
