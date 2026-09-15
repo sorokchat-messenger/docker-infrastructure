@@ -6,9 +6,9 @@ services:
     restart: always
     env_file: ./database/database.env
     volumes:
-      - ./database/postgres_data:/var/lib/postgresql/data
+      - ./database/postgres_data:/var/lib/postgresql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
+      test: [ "CMD-SHELL", "pg_isready" ]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -16,6 +16,5 @@ services:
     networks:
       - sorokchat
 networks:
-  sorokchat: 
+  sorokchat:
     name: sorokchat
-  
