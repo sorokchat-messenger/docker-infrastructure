@@ -15,6 +15,17 @@ services:
       start_period: 10s
     networks:
       - sorokchat
+  pgadmin:
+    image: dpage/pgadmin4:7
+    container_name: sorokchat.pgadmin
+    restart: always
+    env_file: ./database/pgadmin.env
+    ports:
+      - "8081:80"
+    depends_on:
+      - database
+    networks:
+      - sorokchat
 networks:
   sorokchat:
     name: sorokchat
