@@ -1,10 +1,27 @@
 name: sorokchat
 services:
-  database:
+  database-production:
     image: postgres:18-alpine
-    container_name: sorokchat.database
+    container_name: sorokchat.database-production
     restart: always
     env_file: ./database/database.env
+    volumes:
+      - ./database/postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U sorokchat" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - sorokchat
+  database-development:
+    image: postgres:18-alpine
+    container_name: sorokchat.database-development
+    restart: always
+    env_file: ./database/database.env
+    ports:
+      - "5433:5432"
     volumes:
       - ./database/postgres_data:/var/lib/postgresql
     healthcheck:
@@ -23,7 +40,8 @@ services:
     ports:
       - "8081:80"
     depends_on:
-      - database
+      - database-production
+      - database-development
     networks:
       - sorokchat
 networks:
