@@ -1,2 +1,3 @@
+rabbitmq/*
 database/*
-!database/*.example.*
+!/**/*.example.env

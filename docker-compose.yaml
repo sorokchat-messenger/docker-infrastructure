@@ -44,6 +44,17 @@ services:
       - database-development
     networks:
       - sorokchat
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: sorokchat.rabbitmq
+    ports:
+      - "15672:15672"
+    env_file: ./rabbitmq/rabbitmq.env
+    volumes:
+      - ./rabbitmq/rabbitmq_data:/var/lib/rabbitmq
+      - ./rabbitmq/rabbitmq_logs:/var/log/rabbitmq
+    networks:
+      - sorokchat
 networks:
   sorokchat:
     name: sorokchat
